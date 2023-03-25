@@ -124,3 +124,26 @@ const icons = [
         color: 'blue'
     }
 ];
+
+const cards = document.getElementById("cards");
+
+function createCards()
+{
+    icons.forEach(element => 
+    {
+        const card = document.createElement("div");
+        const icon = document.createElement("i");
+        const name = document.createElement("h5");
+
+        card.classList.add("card" , "col" , "py-3" , "m-4" , "flex-columns" , "align-items-center" , "text-center");
+        icon.classList.add(element.prefix + element.family , element.prefix + element.name);
+        icon.style.color = element.color;
+        name.innerText = element.name;
+
+        card.appendChild(icon);
+        card.appendChild(name);
+        cards.appendChild(card);
+    });
+}
+
+createCards();
