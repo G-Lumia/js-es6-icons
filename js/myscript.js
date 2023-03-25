@@ -137,7 +137,8 @@ function createCards()
 
         card.classList.add("card" , "col" , "py-3" , "m-4" , "flex-columns" , "align-items-center" , "text-center");
         icon.classList.add(element.prefix + element.family , element.prefix + element.name);
-        icon.style.color = element.color;
+        icon.style.color = "#" + Math.floor(Math.random()*16777215).toString(16);
+        console.log(icon.style.color);
         name.innerText = element.name;
 
         card.appendChild(icon);
