@@ -142,8 +142,32 @@ function createCards()
 
         card.appendChild(icon);
         card.appendChild(name);
+
+        card.id = element.type;
         cards.appendChild(card);
     });
 }
 
 createCards();
+
+const select = document.getElementById("typeSelect");
+
+select.addEventListener("change" , changeType);
+
+function changeType()
+{
+    const allCards = document.querySelectorAll(".card");
+    console.log(allCards);
+    allCards.forEach(element => 
+    {
+        if(select.value == "all" )
+            element.classList.remove("d-none");
+            else
+            {
+                if(select.value == element.id)
+                element.classList.remove("d-none");
+            else
+                element.classList.add("d-none");
+            }
+    });
+}
