@@ -127,8 +127,34 @@ const icons = [
 ];
 
 const cards = document.getElementById("cards");
-
 const select = document.getElementById("typeSelect");
+
+
+//funzione creata per popolare dinamicamente l'elemento select
+function populateOption()
+{
+    let options = [];
+    let firstOption = document.createElement("option");
+    firstOption.value = "all";
+    firstOption.innerText = firstOption.value.toUpperCase();
+    select.appendChild(firstOption);
+    options.push(firstOption.value);
+
+    icons.forEach(icon => 
+        {
+            if(!options.includes(icon.type))
+            {
+                let option = document.createElement("option");
+                option.value = icon.type;
+                option.innerText = option.value.toUpperCase();
+                select.appendChild(option);
+                options.push(option.value);
+ 
+            }
+        });
+}
+
+populateOption();
 
 // funzione usata per creare una card generica, per poi appenderla all'elelemento puntato tramite l'id cards
 
