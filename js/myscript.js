@@ -126,49 +126,51 @@ const icons = [
 ];
 
 const cards = document.getElementById("cards");
+const select = document.getElementById("typeSelect");
+
+
+function createCard(element) {
+    const card = document.createElement("div");
+    const icon = document.createElement("i");
+    const name = document.createElement("h5");
+
+    card.classList.add("card", "col", "py-3", "m-4", "flex-columns", "align-items-center", "text-center");
+    icon.classList.add(element.prefix + element.family, element.prefix + element.name);
+    icon.style.color = "#" + Math.floor(Math.random() * 16777215).toString(16);
+    name.innerText = element.name;
+
+    card.appendChild(icon);
+    card.appendChild(name);
+
+    card.id = element.type;
+    cards.appendChild(card);
+}
 
 function createCards()
 {
-    icons.forEach(element => 
-    {
-        const card = document.createElement("div");
-        const icon = document.createElement("i");
-        const name = document.createElement("h5");
-
-        card.classList.add("card" , "col" , "py-3" , "m-4" , "flex-columns" , "align-items-center" , "text-center");
-        icon.classList.add(element.prefix + element.family , element.prefix + element.name);
-        icon.style.color = "#" + Math.floor(Math.random()*16777215).toString(16);
-        console.log(icon.style.color);
-        name.innerText = element.name;
-
-        card.appendChild(icon);
-        card.appendChild(name);
-
-        card.id = element.type;
-        cards.appendChild(card);
-    });
+    const filteredIcons = changeType(icons);
+    filteredIcons.forEach(element => createCard(element));
 }
 
 createCards();
 
-const select = document.getElementById("typeSelect");
-
-select.addEventListener("change" , changeType);
-
-function changeType()
+function newCards()
 {
-    const allCards = document.querySelectorAll(".card");
-    console.log(allCards);
-    allCards.forEach(element => 
+    cards.innerHTML = "";
+    const filteredIcons = changeType(icons);
+    filteredIcons.forEach(element => createCard(element));
+};
+
+select.addEventListener("change", newCards);
+
+
+function changeType(icons) {
+    if (select.value === "all") 
     {
-        if(select.value == "all" )
-            element.classList.remove("d-none");
-            else
-            {
-                if(select.value == element.id)
-                element.classList.remove("d-none");
-            else
-                element.classList.add("d-none");
-            }
-    });
+        return icons;
+    } 
+    else 
+    {
+        return icons.filter(icon => select.value === icon.type);
+    }
 }
