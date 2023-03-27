@@ -144,8 +144,6 @@ function createCard(element) {
 
     card.appendChild(icon);
     card.appendChild(name);
-
-    card.id = element.type;
     cards.appendChild(card);
 }
 
